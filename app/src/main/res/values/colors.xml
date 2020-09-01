@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1342ba</color>
+    <color name="colorPrimaryDark">#212F4A</color>
+    <color name="colorAccent">#1342ba</color>
+    <color name="drawableColor">#3b4450</color>
+    <color name="colorBlue">#124bdd</color>
+    <color name="loveColor">#680f18</color>
+
+
+</resources>

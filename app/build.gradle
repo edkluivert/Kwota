@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.kluivert.kwota"
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility  JavaVersion.VERSION_1_8
+    }
+    kotlinOptions{
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    //External libraries
+
+     implementation Dependencies.cardView
+     implementation Dependencies.recyclerView
+     implementation Dependencies.googleMaterial
+     implementation Dependencies.viewPager
+     implementation Dependencies.fragmentKtx
+     implementation Dependencies.navigationUiKtx
+     implementation Dependencies.intuitsdp
+     implementation Dependencies.intuitssp
+
+    //Dagger hilt
+     implementation Dependencies.daggerHilt
+      kapt Dependencies.hiltCompiler
+
+    //Retrofit
+    implementation Dependencies.googleGson
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitConverter
+    implementation Dependencies.loggingInterceptor
+
+
+    kapt Dependencies.roomPersistenceLibraryCompiler // For Kotlin use kapt instead of annotationProcessor
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+      implementation Dependencies.roomPersistenceLibraryRuntime
+      implementation Dependencies.room
+      implementation Dependencies.roomTesting
+
+
+    // LifeCycle ViewModel
+      implementation  Dependencies.lifecyleViewModel
+
+    //LifeCycle LiveData
+      implementation Dependencies.lifecycleLiveData
+
+
+    // Lifecycles only (without ViewModel or LiveData)
+      implementation Dependencies.lifecycleRuntime
+      implementation Dependencies.lifecycleCommon
+
+      implementation Dependencies.kotlinJdk
+      api Dependencies.kotlin_coroutines_core
+      api Dependencies.kotlin_coroutines_android
+
+}

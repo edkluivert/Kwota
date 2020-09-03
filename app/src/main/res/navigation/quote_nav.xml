@@ -7,10 +7,22 @@
 
     <fragment
         android:id="@+id/quoteListFrag"
-        android:name="com.kluivert.kwota.ui.fragments.QuoteListFrag"
+        android:name="com.kluivert.kwota.presentation.fragments.QuoteListFrag"
         android:label="QuoteList"
         tools:layout="@layout/fragment_quote_list" >
-       
+
+        <action
+            android:id="@+id/action_quoteListFrag_to_favoriteFrag"
+            app:destination="@id/favoriteFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFrag"
+        android:name="com.kluivert.kwota.presentation.fragments.FavoriteFrag"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFrag_to_quoteListFrag"
+            app:destination="@id/quoteListFrag" />
     </fragment>
 
 </navigation>

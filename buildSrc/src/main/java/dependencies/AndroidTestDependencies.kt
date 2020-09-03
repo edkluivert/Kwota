@@ -11,7 +11,7 @@ object AndroidTestDependencies {
     val test_rules = "androidx.test:rules:${Versions.test_runner}"
     val text_core_ktx = "androidx.test:core-ktx:${Versions.test_core}"
     val mockk_android = "io.mockk:mockk-android:${Versions.mockk_version}"
-    val fragment_testing = "androidx.fragment:fragment-testing:${Versions.fragment_ktx_versions}"
+    val fragment_testing = "androidx.fragment:fragment-testing:${Versions.fragment_testing_version}"
     val androidx_test_ext = "androidx.test.ext:junit-ktx:${Versions.androidx_test_ext}"
     val navigation_testing = "androidx.navigation:navigation-testing:${Versions.navigation_ui_ktx_versions}"
     val androidTesting = "androidx.test.runner.AndroidJUnitRunner"

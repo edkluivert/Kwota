@@ -1,4 +1,4 @@
-package com.kluivert.kwota.ui.fragments
+package com.kluivert.kwota.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

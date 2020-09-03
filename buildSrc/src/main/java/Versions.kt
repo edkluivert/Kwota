@@ -8,6 +8,7 @@ object Versions {
     const val cardview_version = "1.0.0"
     const val fragment_ktx_versions = "2.3.0"
     const val navigation_ui_ktx_versions = "2.3.0"
+    const  val fragment_testing_version = "1.2.0"
     const val intuit_sdp_version = "1.0.6"
     const val intuit_ssp_version = "1.0.6"
     const val hilt_android_version = "2.28-alpha"

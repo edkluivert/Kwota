@@ -1,4 +1,4 @@
-package com.kluivert.kwota.presentation.entities
+package com.kluivert.kwota.domain.entities
 
 data class Quote (
 

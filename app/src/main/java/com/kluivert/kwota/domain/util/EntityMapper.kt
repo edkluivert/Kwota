@@ -1,4 +1,4 @@
-package com.kluivert.kwota.util.mapper
+package com.kluivert.kwota.domain.util
 
 interface EntityMapper <Entity, DomainModel>{
 

@@ -2,6 +2,7 @@ package com.kluivert.kwota.presentation.di.remoteDataModule
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.kluivert.kwota.data.network.api.QuoteApi
 import com.kluivert.kwota.util.constants.Constants
 import dagger.Module
 import dagger.Provides
@@ -33,6 +34,15 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
 
 
+    }
+
+
+    @Singleton
+    @Provides
+    fun ProvideApiService(retrofit : Retrofit.Builder) : QuoteApi{
+
+        return retrofit.build()
+            .create(QuoteApi::class.java)
     }
 
 }

@@ -98,8 +98,9 @@ dependencies {
 
     //Dagger hilt
      implementation Dependencies.daggerHilt
-      kapt AnnotationProcessing.hiltCompiler
-
+     kapt AnnotationProcessing.hiltandroidCompiler
+     kapt AnnotationProcessing.hiltCompiler
+     implementation Dependencies.hiltViewModels
     //Retrofit
      implementation Dependencies.googleGson
      implementation Dependencies.retrofit
@@ -108,27 +109,27 @@ dependencies {
 
 
      kapt AnnotationProcessing.roomPersistenceLibraryCompiler // For Kotlin use kapt instead of annotationProcessor
-
+     kapt AnnotationProcessing.lifecycle_compiler
     // optional - Kotlin Extensions and Coroutines support for Room
-      implementation Dependencies.roomPersistenceLibraryRuntime
-      implementation Dependencies.room
-      implementation AndroidTestDependencies.roomTesting
+     implementation Dependencies.roomPersistenceLibraryRuntime
+     implementation Dependencies.room
+     implementation AndroidTestDependencies.roomTesting
 
 
     // LifeCycle ViewModel
-      implementation  Dependencies.lifecyleViewModel
+     implementation  Dependencies.lifecyleViewModel
 
     //LifeCycle LiveData
-      implementation Dependencies.lifecycleLiveData
+     implementation Dependencies.lifecycleLiveData
 
 
     // Lifecycles only (without ViewModel or LiveData)
-      implementation Dependencies.lifecycleRuntime
-      implementation Dependencies.lifecycleCommon
+     implementation Dependencies.lifecycleRuntime
+     implementation Dependencies.lifecycleCommon
 
-      implementation Dependencies.kotlinJdk
-      api Dependencies.kotlin_coroutines_core
-      api Dependencies.kotlin_coroutines_android
+     implementation Dependencies.kotlinJdk
+     api Dependencies.kotlin_coroutines_core
+     api Dependencies.kotlin_coroutines_android
 
 
       testImplementation TestDependencies.mockk

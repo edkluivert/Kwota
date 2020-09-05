@@ -6,6 +6,7 @@
     <color name="drawableColor">#3b4450</color>
     <color name="colorBlue">#124bdd</color>
     <color name="loveColor">#680f18</color>
+    <color name="white">#FFFFFF</color>
 
 
 </resources>

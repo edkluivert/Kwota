@@ -1,8 +1,8 @@
 package com.kluivert.kwota.data.network.mapper
 
 import com.kluivert.kwota.data.network.model.NetworkQuoteEntity
-import com.kluivert.kwota.presentation.entities.Quote
-import com.kluivert.kwota.util.mapper.EntityMapper
+import com.kluivert.kwota.domain.entities.Quote
+import com.kluivert.kwota.domain.util.EntityMapper
 import javax.inject.Inject
 
 class NetworkMapper

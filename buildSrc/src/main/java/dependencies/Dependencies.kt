@@ -18,6 +18,7 @@ object Dependencies {
     val retrofitConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_converter_version}"
     val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.logging_interceptor_version}"
     val daggerHilt = "com.google.dagger:hilt-android:${Versions.hilt_android_version}"
+    val hiltViewModels = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltViewModels}"
     val room = "androidx.room:room-ktx:${Versions.room_version}"
     val kotlinJdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin_jdk}"
     val kotlin_coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlin_coroutines_version}"

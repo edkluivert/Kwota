@@ -9,7 +9,7 @@ import com.kluivert.kwota.data.cache.model.LocalQuoteEntity
 interface QuoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addQuote(localQuoteEntity: LocalQuoteEntity)
+    suspend fun addQuote(localQuoteEntity: LocalQuoteEntity) : Long
 
     @Delete
     suspend fun deleteQuote(localQuoteEntity: LocalQuoteEntity)

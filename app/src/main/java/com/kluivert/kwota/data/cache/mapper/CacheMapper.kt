@@ -1,13 +1,11 @@
 package com.kluivert.kwota.data.cache.mapper
 
 import com.kluivert.kwota.data.cache.model.LocalQuoteEntity
-import com.kluivert.kwota.domain.entities.Quote
-import com.kluivert.kwota.domain.util.EntityMapper
 import javax.inject.Inject
 
 class CacheMapper
 
-@Inject
+/*@Inject
 constructor() : EntityMapper<LocalQuoteEntity, Quote> {
     override fun mapFromEntity(entity: LocalQuoteEntity): Quote {
         return Quote(
@@ -18,8 +16,8 @@ constructor() : EntityMapper<LocalQuoteEntity, Quote> {
 
     override fun mapToEntity(domainModel: Quote): LocalQuoteEntity {
       return LocalQuoteEntity(
-          author = domainModel.author,
-          text = domainModel.text,
+          author = domainModel.author!!,
+          text = domainModel.text!!,
           id = 0
       )
     }
@@ -27,4 +25,4 @@ constructor() : EntityMapper<LocalQuoteEntity, Quote> {
     fun mapFromEntityList(entity: List<LocalQuoteEntity>) : List<Quote>{
         return entity.map { mapFromEntity(it) }
     }
-}
+}*/

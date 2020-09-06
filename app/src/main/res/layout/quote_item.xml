@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardCornerRadius="@dimen/_2sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary">
 
 
@@ -14,20 +23,57 @@
         android:padding="@dimen/_12sdp"
         android:text="@string/dummyqoute"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
+        android:textSize="@dimen/_16ssp"
+
        />
 
     <TextView
+        android:id="@+id/tvAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:paddingBottom="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:text="Author"
-        android:textColor="@color/white"
-        android:layout_gravity="end"
-        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/colorBlue"
+        android:textSize="@dimen/_14sdp"
+        android:fontFamily="@font/raleway_bold"
         />
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_10sdp"
+        >
+        <ImageView
+            android:id="@+id/imgLike"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:src="@drawable/like"
+            app:tint="@color/colorBlue"
+            android:layout_marginBottom="@dimen/_20sdp"
+            />
+
+        <ImageView
+            android:id="@+id/imgShare"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:src="@drawable/share"
+            app:tint="@color/colorBlue"
+            android:layout_marginBottom="@dimen/_20sdp"
+            />
+
+    </LinearLayout>
+
+
+
+
 </LinearLayout>
+</androidx.cardview.widget.CardView>

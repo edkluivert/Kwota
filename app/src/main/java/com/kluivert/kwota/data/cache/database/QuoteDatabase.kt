@@ -4,8 +4,9 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.kluivert.kwota.data.cache.dao.QuoteDao
 import com.kluivert.kwota.data.cache.model.LocalQuoteEntity
+import com.kluivert.kwota.data.model.QuoteModel
 
-@Database(entities = [LocalQuoteEntity::class],version = 1, exportSchema = true)
+@Database(entities = [QuoteModel::class],version = 1, exportSchema = true)
 abstract class QuoteDatabase : RoomDatabase(){
 
     abstract fun quoteDao() : QuoteDao

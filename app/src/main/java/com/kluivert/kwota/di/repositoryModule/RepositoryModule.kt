@@ -19,4 +19,5 @@ object RepositoryModule {
         return DataRepository(quoteApi)
     }
 
+
 }

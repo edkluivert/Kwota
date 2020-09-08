@@ -10,25 +10,29 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kluivert.kwota.data.model.QuoteModel
 import com.kluivert.kwota.data.network.state.DataState
 import com.kluivert.kwota.databinding.FragmentQuoteListBinding
 import com.kluivert.kwota.util.DividerItemDecoration
 import com.kluivert.kwota.ui.adapter.QuoteAdapter
 import com.kluivert.kwota.ui.viewmodel.QuoteViewModel
+import com.kluivert.kwota.util.KwotaListener
 import dagger.hilt.android.AndroidEntryPoint
 
+
+
 @AndroidEntryPoint
-class QuoteListFrag : Fragment() {
+class QuoteListFrag : Fragment(),KwotaListener {
 
-
+    private var noteClicked : Int = -1
     private var _binding: FragmentQuoteListBinding? = null
-
+    var quotelist: MutableList<QuoteModel> = mutableListOf()
     private val quotelistbinding get() = _binding!!
 
     private val quoteViewModel : QuoteViewModel by viewModels()
 
 
-    val listQuotesAdapter = QuoteAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,13 +49,40 @@ class QuoteListFrag : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val quotesList = quoteViewModel.getQuotesList()
+        quoteViewModel.setQuoteEvents()
 
         val adapter = QuoteAdapter()
         quotelistbinding.listQuoteRecycler.adapter = adapter
         quotelistbinding.listQuoteRecycler.addItemDecoration(DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL))
 
 
-        quotesList.observe(viewLifecycleOwner, Observer {dataState->
+        quoteViewModel._myResponse.observe(viewLifecycleOwner, Observer {dataState->
+            when(dataState){
+
+                is DataState.Loading->{
+                    displayProgressBar(true)
+                }
+
+                is DataState.Success ->{
+
+                    displayProgressBar(false)
+                    //val quotesResult = dataState.data
+                    adapter.submitList(dataState.data!!.body())
+                }
+                is DataState.Failed->{
+                    displayProgressBar(false)
+                    displayError(dataState.message.toString())
+
+                }
+
+                is DataState.Exception->{
+                    displayProgressBar(false)
+                }
+            }
+        })
+
+
+     /*  quotesList.observe(viewLifecycleOwner, Observer {dataState->
 
             when(dataState){
 
@@ -60,9 +91,10 @@ class QuoteListFrag : Fragment() {
                 }
 
                 is DataState.Success ->{
+
                        displayProgressBar(false)
-                    val quotesResult = dataState.data
-                     adapter.submitList(quotesResult)
+                    //val quotesResult = dataState.data
+                     adapter.submitList(dataState.data!!.body())
                 }
                 is DataState.Failed->{
                          displayProgressBar(false)
@@ -75,16 +107,12 @@ class QuoteListFrag : Fragment() {
                 }
             }
 
-        })
-
-    }
-    /*  override fun likelistener(note: Quote, position: Int) {
+        })*/
 
     }
 
-    override suspend fun unlikeListener(note: Quote, position: Int) {
 
-    }*/
+
 
     @SuppressLint("SetTextI18n")
     private fun displayError(message: String) {
@@ -104,6 +132,14 @@ class QuoteListFrag : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun likelistener(quote: QuoteModel, position: Int) {
+
+    }
+
+    override suspend fun unlikeListener(quote: QuoteModel, position: Int) {
+
     }
 
 }

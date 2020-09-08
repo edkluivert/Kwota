@@ -6,6 +6,7 @@ import com.kluivert.kwota.data.model.QuoteModel
 import com.kluivert.kwota.util.KwotaDiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.kluivert.kwota.R
+import com.kluivert.kwota.util.KwotaListener
 
 
 class QuoteAdapter : ListAdapter<QuoteModel, QuoteViewHolder>(KwotaDiffUtil()){

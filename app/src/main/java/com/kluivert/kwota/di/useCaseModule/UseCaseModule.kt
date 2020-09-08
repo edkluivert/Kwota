@@ -16,4 +16,7 @@ object UseCaseModule {
     fun providesDataUseCase(dataRepository: DataRepository):DataUseCase{
         return DataUseCase(dataRepository)
     }
+
+
+
 }

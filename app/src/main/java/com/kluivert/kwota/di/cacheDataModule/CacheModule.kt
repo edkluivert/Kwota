@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.kluivert.kwota.data.cache.dao.QuoteDao
 import com.kluivert.kwota.data.cache.database.QuoteDatabase
+import com.kluivert.kwota.data.repository.LocalDbRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,21 +17,13 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object CacheModule {
 
-    @Singleton
     @Provides
-    fun providesCacheData(@ApplicationContext context: Context) : QuoteDatabase{
-               return Room.databaseBuilder(
-                   context,
-                   QuoteDatabase::class.java,
-                   QuoteDatabase.DATABASE_NAME
-               )
-                   .fallbackToDestructiveMigration()
-                   .build()
+    fun providesQuoteDao(@ApplicationContext appContext: Context) : QuoteDao {
+        return QuoteDatabase.getInstance(appContext).quoteDao
     }
 
-    @Singleton
     @Provides
-    fun providesQuoteDao(quoteDatabase: QuoteDatabase):QuoteDao{
-        return quoteDatabase.quoteDao()
-    }
+    fun providesQuoteDBRepository(quoteDao: QuoteDao) =LocalDbRepository(quoteDao)
+
 }
+

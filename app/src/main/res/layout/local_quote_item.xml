@@ -17,7 +17,7 @@
 
 
     <TextView
-        android:id="@+id/tvQuote"
+        android:id="@+id/localtvQuote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_12sdp"
@@ -28,7 +28,7 @@
        />
 
     <TextView
-        android:id="@+id/tvAuthor"
+        android:id="@+id/localtvAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
@@ -50,27 +50,19 @@
         android:layout_marginTop="@dimen/_10sdp"
         >
 
-         <com.like.LikeButton
-             android:id="@+id/imgLike"
-             android:layout_width="@dimen/_20sdp"
-             android:layout_height="@dimen/_20sdp"
-             android:layout_marginStart="@dimen/_20sdp"
-             android:layout_marginBottom="@dimen/_20sdp"
-             app:icon_type="heart"
-             app:circle_start_color="@color/colorBlue"
-             app:like_drawable="@drawable/thumb_on"
-             app:unlike_drawable="@drawable/thumb_off"
-             app:dots_primary_color="@color/loveColor"
-             app:dots_secondary_color="@color/colorBlue"
-             app:circle_end_color="@color/loveColor"
-             app:icon_size="25dp"
-             app:liked="false"
-             app:anim_scale_factor="2"
-             app:is_enabled="true"
-             />
+        <ImageView
+            android:id="@+id/localimgLike"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:src="@drawable/heart"
+            app:tint="@color/loveColor"
+            android:layout_marginBottom="@dimen/_20sdp"
+            />
+
 
         <ImageView
-            android:id="@+id/imgShare"
+            android:id="@+id/localimgShare"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_20sdp"

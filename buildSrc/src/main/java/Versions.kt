@@ -22,6 +22,7 @@ object Versions {
     const val compilesdk = 29
     const val minsdk = 21
     const val targetsdk = 29
+    const val likeButton = "0.2.3"
     const val hiltViewModels = "1.0.0-alpha01"
     const val play_services = "4.3.3"
     const val ktx = "1.2.0"

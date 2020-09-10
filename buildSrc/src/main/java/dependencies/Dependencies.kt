@@ -29,5 +29,6 @@ object Dependencies {
     val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_ui_ktx_versions}"
     val navigation_runtime = "androidx.navigation:navigation-runtime:${Versions.navigation_ui_ktx_versions}"
     val room_runtime = "androidx.room:room-runtime:${Versions.room_version}"
+    val likeButton = "com.github.jd-alexander:LikeButton:${Versions.likeButton}"
 
 }

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/quoteListFrag"
         android:name="com.kluivert.kwota.ui.fragments.QuoteListFrag"
-        android:label="QuoteList"
+        android:label="Quotes"
         tools:layout="@layout/fragment_quote_list" >
 
         <action
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/favoriteFrag"
         android:name="com.kluivert.kwota.ui.fragments.FavoriteFrag"
-        android:label="fragment_favorite"
+        android:label="Bookmarks"
         tools:layout="@layout/fragment_favorite" >
         <action
             android:id="@+id/action_favoriteFrag_to_quoteListFrag"

@@ -16,7 +16,7 @@ interface QuoteDao {
     suspend fun deleteQuote(quoteModel: QuoteModel)
 
     @Query("SELECT * FROM quotes_table ORDER BY id DESC")
-    fun readQuote() : LiveData<List<QuoteModel>>
+    fun readQuote() : LiveData<MutableList<QuoteModel>>
 
 
 

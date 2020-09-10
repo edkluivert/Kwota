@@ -16,9 +16,7 @@ class QuoteViewModel
 @ViewModelInject
 constructor(private val dataUseCase: DataUseCase) : ViewModel(){
 
-    val _myResponse : MutableLiveData<DataState<Response<List<QuoteModel>>>> = MutableLiveData()
-
-
+    val _myResponse : MutableLiveData<DataState<List<QuoteModel>>> = MutableLiveData()
 
 
 
@@ -32,16 +30,13 @@ constructor(private val dataUseCase: DataUseCase) : ViewModel(){
 
     }
 
-    fun getQuotesList() : LiveData<DataState<Response<List<QuoteModel>>>>{
-      return  liveData<DataState<Response<List<QuoteModel>>>> {
+    fun getQuotesList() : LiveData<DataState<List<QuoteModel>>>{
+      return  liveData<DataState<List<QuoteModel>>> {
            emit(DataState.Loading())
           emit(dataUseCase.getQuotesList())
         }
     }
 
-    fun addQuote(quoteModel: QuoteModel){
-
-    }
 
 
 

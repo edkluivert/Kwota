@@ -11,7 +11,7 @@ constructor(
     private val quoteApi: QuoteApi
 ){
 
-    suspend fun getQuotes() : Response<List<QuoteModel>>{
+    suspend fun getQuotes() : List<QuoteModel>{
        return quoteApi.getQuotes()
     }
 

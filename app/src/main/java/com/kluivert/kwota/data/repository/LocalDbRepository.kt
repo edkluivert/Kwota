@@ -12,13 +12,10 @@ constructor(
 
 ){
 
-    suspend fun addQuote(quoteModel: QuoteModel){
-        quoteDao.addQuote(quoteModel)
-    }
+    suspend fun addQuote(quoteModel: QuoteModel)= quoteDao.addQuote(quoteModel)
 
-    suspend fun deleteQuote(quoteModel: QuoteModel){
-        quoteDao.deleteQuote(quoteModel)
-    }
+    suspend fun deleteQuote(quoteModel: QuoteModel) = quoteDao.deleteQuote(quoteModel)
+
 
     suspend fun fetchDbQuotes() = quoteDao.readQuote()
 

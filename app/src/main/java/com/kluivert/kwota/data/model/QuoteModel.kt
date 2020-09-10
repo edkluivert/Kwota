@@ -10,14 +10,14 @@ data class QuoteModel(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id : Int,
+    var id : Int,
 
     @SerializedName("author")
     @ColumnInfo(name = "author")
-    val author : String,
+    var author : String,
 
 
     @SerializedName("text")
     @ColumnInfo(name = "text")
-    val text : String
+    var text : String
 )

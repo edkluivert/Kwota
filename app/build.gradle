@@ -82,7 +82,7 @@ dependencies {
 
 
     //External libraries
-
+     implementation Dependencies.likeButton
      implementation Dependencies.cardView
      implementation Dependencies.recyclerView
      implementation Dependencies.googleMaterial
@@ -95,6 +95,7 @@ dependencies {
      implementation Dependencies.navigation_runtime
      implementation Dependencies.markdown_processor
      implementation Dependencies.room_runtime
+
 
     //Dagger hilt
      implementation Dependencies.daggerHilt

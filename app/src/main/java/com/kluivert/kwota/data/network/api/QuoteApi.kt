@@ -8,6 +8,6 @@ import retrofit2.http.GET
 interface QuoteApi {
 
     @GET(Constants.QUOTE_PAGE_REQUEST)
-    suspend fun getQuotes() : Response<List<QuoteModel>>
+    suspend fun getQuotes() : List<QuoteModel>
 
 }

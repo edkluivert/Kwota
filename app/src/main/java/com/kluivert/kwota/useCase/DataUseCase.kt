@@ -12,14 +12,14 @@ constructor(
     private val dataRepository: DataRepository
 ){
 
-    suspend fun getQuotesList() : DataState<Response<List<QuoteModel>>> {
+    suspend fun getQuotesList() : DataState<List<QuoteModel>> {
 
         val quotesRepository = dataRepository.getQuotes()
 
-       val resultData = if (quotesRepository.isSuccessful){
+       val resultData = if (!quotesRepository.isNullOrEmpty()){
             DataState.Success(quotesRepository)
         }else{
-            DataState.Failed(quotesRepository.errorBody().toString())
+            DataState.Failed("Something went wrong. Please try again")
 
         }
         return resultData

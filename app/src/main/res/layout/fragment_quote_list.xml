@@ -8,17 +8,31 @@
     tools:context=".ui.fragments.QuoteListFrag">
 
 
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_330sdp"
+        android:background="@drawable/button_back"
+        android:text="Retry"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimaryDark"
+        />
+
 
     <TextView
         android:id="@+id/tvError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_20ssp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent"
         />
 
 
@@ -45,5 +59,21 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSaved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/white"
+        app:srcCompat="@drawable/bookmark"
+        app:fabCustomSize="@dimen/_50sdp"
+        app:maxImageSize="@dimen/_20sdp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

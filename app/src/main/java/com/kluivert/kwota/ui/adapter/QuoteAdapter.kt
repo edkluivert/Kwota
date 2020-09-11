@@ -56,11 +56,9 @@ class QuoteAdapter(
          imgLike.setOnLikeListener(object : OnLikeListener {
              override fun liked(likeButton: LikeButton) {
                  GlobalScope.launch {  listener.likelistener(quotelist[position],position)}
-                 Toast.makeText(context,"Saved",Toast.LENGTH_SHORT).show()
              }
              override fun unLiked(likeButton: LikeButton) {
-                 GlobalScope.launch {  listener.unlikeListener(quotelist[position],position)}
-                 Toast.makeText(context,"Removed",Toast.LENGTH_SHORT).show()
+
              }
          })
 

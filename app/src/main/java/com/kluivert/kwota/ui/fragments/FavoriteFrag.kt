@@ -1,6 +1,8 @@
 package com.kluivert.kwota.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,17 +14,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kluivert.kwota.data.model.QuoteModel
 import com.kluivert.kwota.databinding.FragmentFavoriteBinding
-import com.kluivert.kwota.databinding.FragmentQuoteListBinding
 import com.kluivert.kwota.ui.adapter.LocalQuoteAdapter
-import com.kluivert.kwota.ui.adapter.QuoteAdapter
-import com.kluivert.kwota.ui.viewmodel.QuoteViewModel
 import com.kluivert.kwota.ui.viewmodel.SavedQuotesViewModel
 import com.kluivert.kwota.util.DividerItemDecoration
-import com.kluivert.kwota.util.KwotaListener
+import com.kluivert.kwota.util.LocalListener
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class FavoriteFrag : Fragment(),KwotaListener,LifecycleOwner {
+class FavoriteFrag : Fragment(),LocalListener,LifecycleOwner {
 
     private var _binding: FragmentFavoriteBinding? = null
     private val quotesavedbinding get() = _binding!!
@@ -44,30 +44,29 @@ class FavoriteFrag : Fragment(),KwotaListener,LifecycleOwner {
         super.onViewCreated(view, savedInstanceState)
 
         this.lifecycle.addObserver(localquoteViewModel)
-       // localquoteViewModel.fetchStudentData()
+
         setHasOptionsMenu(true)
-        val adapter = LocalQuoteAdapter(quotelist,this)
+        val adapter = LocalQuoteAdapter(quotelist, this)
         quotesavedbinding.localRecycler.adapter = adapter
         quotesavedbinding.localRecycler.addItemDecoration(
-            DividerItemDecoration(requireContext(),
-                LinearLayoutManager.VERTICAL)
+            DividerItemDecoration(
+                requireContext(),
+                LinearLayoutManager.VERTICAL
+            )
         )
 
-
         localquoteViewModel.quoteFinalList.observe(viewLifecycleOwner, Observer {
-              adapter.updateListItems(it)
-        })
+            adapter.updateListItems(it)
 
+        })
         quotesavedbinding.localRecycler.smoothScrollToPosition(0)
 
     }
-
-    override suspend fun likelistener(quote: QuoteModel, position: Int) {
-
-    }
-
     override suspend fun unlikeListener(quote: QuoteModel, position: Int) {
-      localquoteViewModel
+      localquoteViewModel.removeQuote(quote)
+        Handler(Looper.getMainLooper()).post {
+            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

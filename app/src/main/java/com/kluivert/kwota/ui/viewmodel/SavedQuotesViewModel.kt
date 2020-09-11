@@ -12,13 +12,13 @@ class SavedQuotesViewModel
 @ViewModelInject constructor(private val localDbRepository: LocalDbRepository) :
     ViewModel() ,LifecycleObserver {
 
-    private  val insertedId =  MutableLiveData<Long>()
-    var quoteFinalList: LiveData<MutableList<QuoteModel>> = MutableLiveData<MutableList<QuoteModel>>()
+    private val insertedId = MutableLiveData<Long>()
+    var quoteFinalList: LiveData<MutableList<QuoteModel>> =
+        MutableLiveData<MutableList<QuoteModel>>()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun fetchStudentData(){
+    fun fetchStudentData() {
         viewModelScope.launch {
-
             quoteFinalList = localDbRepository.fetchDbQuotes()
         }
     }
@@ -26,21 +26,19 @@ class SavedQuotesViewModel
     fun addQuote(quoteModel: QuoteModel) {
         viewModelScope.launch {
 
-                val userId: Long = localDbRepository.addQuote(quoteModel)
-                insertedId.postValue(userId)
-            }
+            val userId: Long = localDbRepository.addQuote(quoteModel)
+            insertedId.postValue(userId)
         }
+    }
 
-    fun removeQuote(quoteModel: QuoteModel){
+    fun removeQuote(quoteModel: QuoteModel) {
         viewModelScope.launch {
-
+            localDbRepository.deleteQuote(quoteModel)
         }
     }
+}
 
-    fun fetchInsertedId():LiveData<Long> = insertedId
-    }
 
-   // fun fetchError(): LiveData<String> = error
 
 
 

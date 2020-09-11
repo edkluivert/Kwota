@@ -1,10 +1,15 @@
 package com.kluivert.kwota.ui.fragments
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
 import android.view.View.inflate
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -13,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.SnackbarContentLayout
 import com.kluivert.kwota.R
 import com.kluivert.kwota.data.model.QuoteModel
 import com.kluivert.kwota.data.network.state.DataState
@@ -39,8 +45,8 @@ class QuoteListFrag : Fragment(),KwotaListener {
     private val quotelistbinding get() = _binding!!
     private val quoteViewModel : QuoteViewModel by viewModels()
     private val localquoteViewModel :  SavedQuotesViewModel by viewModels()
+    lateinit var adapter : QuoteAdapter
 
-    private var snackbar: Snackbar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,11 +60,12 @@ class QuoteListFrag : Fragment(),KwotaListener {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val quotesList = quoteViewModel.getQuotesList()
-
+      //  val quotesList = quoteViewModel.getQuotesList()
+    quotelistbinding.btnRetry.visibility = View.GONE
         val myNetwork = CheckNetwork(requireContext())
 
         setHasOptionsMenu(true)
@@ -66,24 +73,36 @@ class QuoteListFrag : Fragment(),KwotaListener {
         myNetwork.isOnline
         if (myNetwork.isOnline){
             quoteViewModel.setQuoteEvents()
+            getData()
             quotelistbinding.btnRetry.visibility = View.GONE
             quotelistbinding.tvError.visibility = View.GONE
+
         }else{
             displayProgressBar(false)
             quotelistbinding.btnRetry.visibility = View.VISIBLE
             quotelistbinding.tvError.text = "No Internet Connection!"
-            snackbar = Snackbar.make(quotelistbinding.root, "You are offline, Please try again", Snackbar.LENGTH_LONG) //Assume "rootLayout" as the root layout of every activity.
-            snackbar?.duration = BaseTransientBottomBar.LENGTH_INDEFINITE
-            snackbar?.show()
-           snackbar?.dismiss()
+
+
         }
 
 
 
         quotelistbinding.btnRetry.setOnClickListener {
-            displayProgressBar(true)
-            quoteViewModel.setQuoteEvents()
-            Toast.makeText(requireContext(),"Hold On",Toast.LENGTH_SHORT).show()
+            if(myNetwork.isOnline){
+                displayProgressBar(true)
+                quoteViewModel.setQuoteEvents()
+                getData()
+                quotelistbinding.btnRetry.visibility = View.GONE
+                Toast.makeText(requireContext(),"Hold On",Toast.LENGTH_SHORT).show()
+
+            }else{
+                displayProgressBar(false)
+                quotelistbinding.btnRetry.visibility = View.VISIBLE
+                quotelistbinding.tvError.text = "No Internet Connection!"
+
+            }
+
+
 
         }
 
@@ -91,7 +110,7 @@ class QuoteListFrag : Fragment(),KwotaListener {
         findNavController().navigate(R.id.action_quoteListFrag_to_favoriteFrag)
     }
 
-        val adapter = QuoteAdapter(quotelist, this)
+         adapter = QuoteAdapter(quotelist, this)
         quotelistbinding.listQuoteRecycler.adapter = adapter
         quotelistbinding.listQuoteRecycler.addItemDecoration(
             DividerItemDecoration(
@@ -100,7 +119,41 @@ class QuoteListFrag : Fragment(),KwotaListener {
             )
         )
 
+        quotelistbinding.listQuoteRecycler.smoothScrollToPosition(0)
 
+
+
+     /*  quotesList.observe(viewLifecycleOwner, Observer {dataState->
+
+            when(dataState){
+
+                is DataState.Loading->{
+                            displayProgressBar(true)
+                }
+
+                is DataState.Success ->{
+
+                       displayProgressBar(false)
+
+                    adapter.updateListItems(dataState.data as MutableList<QuoteModel>)
+                    quotelistbinding.btnRetry.visibility = View.GONE
+                }
+                is DataState.Failed->{
+                         displayProgressBar(false)
+                         displayError(dataState.message.toString())
+
+                }
+
+                is DataState.Exception->{
+                           displayProgressBar(false)
+                }
+            }
+
+        })*/
+
+    }
+
+    private fun getData(){
         quoteViewModel._myResponse.observe(viewLifecycleOwner, Observer { dataState ->
             when (dataState) {
 
@@ -129,37 +182,6 @@ class QuoteListFrag : Fragment(),KwotaListener {
             }
         })
 
-        quotelistbinding.listQuoteRecycler.smoothScrollToPosition(0)
-
-
-
-     /*  quotesList.observe(viewLifecycleOwner, Observer {dataState->
-
-            when(dataState){
-
-                is DataState.Loading->{
-                            displayProgressBar(true)
-                }
-
-                is DataState.Success ->{
-
-                       displayProgressBar(false)
-                    //val quotesResult = dataState.data
-                     adapter.submitList(dataState.data!!.body())
-                }
-                is DataState.Failed->{
-                         displayProgressBar(false)
-                         displayError(dataState.message.toString())
-
-                }
-
-                is DataState.Exception->{
-                           displayProgressBar(false)
-                }
-            }
-
-        })*/
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -170,23 +192,21 @@ class QuoteListFrag : Fragment(),KwotaListener {
 
         when(item.itemId){
             R.id.miFav->{
-
+                     Toast.makeText(requireContext(),"Developed with love",Toast.LENGTH_SHORT).show()
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        quotelistbinding.btnRetry.visibility = View.GONE
+    }
 
     @SuppressLint("SetTextI18n")
     private fun displayError(message: String) {
-
-        if (message != null) {
-            quotelistbinding.tvError.text = message
-        } else {
-            quotelistbinding.tvError.text = "Unknown error"
-        }
+        quotelistbinding.tvError.text = message
 
     }
 
@@ -200,37 +220,16 @@ class QuoteListFrag : Fragment(),KwotaListener {
     }
 
     override suspend fun likelistener(quote: QuoteModel, position: Int) {
-        //observeLocalViewModel()
-
-       val author  = tvAuthor.text.toString()
-      val text  = tvQuote.text.toString()
-
-
         localquoteViewModel.addQuote(quote)
+        Handler(Looper.getMainLooper()).post {
+            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override suspend fun unlikeListener(quote: QuoteModel, position: Int) {
-        localquoteViewModel.removeQuote(quote)
+       // localquoteViewModel.removeQuote(quote)
     }
 
-
-
-    /* private fun observeLocalViewModel(){
-         localquoteViewModel.fetchError().observe(viewLifecycleOwner,
-              Observer<String> { t -> Toast.makeText(requireContext(),t, Toast.LENGTH_LONG).show() })
-
-         localquoteViewModel.fetchInsertedId().observe(viewLifecycleOwner,
-              Observer<Long> { t ->
-                  if(t != -1L){
-                      Toast.makeText(requireContext(),"Saved $t", Toast.LENGTH_LONG).show()
-
-                  }else{
-                      Toast.makeText(requireContext(),"Failed",Toast.LENGTH_LONG).show()
-
-                  }
-
-              })
-      }*/
 
 
 }

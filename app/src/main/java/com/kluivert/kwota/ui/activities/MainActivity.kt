@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -32,9 +33,6 @@ class MainActivity : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiv
 
     }
 
-
-
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.fragment_nav)
         return navController.navigateUp() || super.onSupportNavigateUp()
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity(),ConnectivityReceiver.ConnectivityReceiv
 
     private fun showNetworkMessage(isConnected: Boolean) {
         if (!isConnected) {
-            snackbar = Snackbar.make(findViewById(R.id.mainAct), "You are offline", Snackbar.LENGTH_LONG) //Assume "rootLayout" as the root layout of every activity.
+            snackbar = Snackbar.make(findViewById(R.id.mainAct), "You are offline", Snackbar.LENGTH_LONG)
             snackbar?.duration = BaseTransientBottomBar.LENGTH_INDEFINITE
             snackbar?.show()
         } else {

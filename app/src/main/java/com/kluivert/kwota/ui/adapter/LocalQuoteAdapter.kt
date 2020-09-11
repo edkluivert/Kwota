@@ -1,5 +1,6 @@
 package com.kluivert.kwota.ui.adapter
 
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.kluivert.kwota.databinding.LocalQuoteItemBinding
 import com.kluivert.kwota.databinding.QuoteItemBinding
 import com.kluivert.kwota.util.KwotaDiffUtil
 import com.kluivert.kwota.util.KwotaListener
+import com.kluivert.kwota.util.LocalListener
 import com.like.IconType
 import com.like.LikeButton
 import com.like.OnLikeListener
@@ -22,7 +24,7 @@ import kotlinx.coroutines.launch
 
 class LocalQuoteAdapter(
     val quotelist: MutableList<QuoteModel>,
-    var listener: KwotaListener
+    var listener: LocalListener
 ) : RecyclerView.Adapter<LocalQuoteAdapter.LocalQuoteAdapterViewHolder>() {
 
     fun updateListItems(newList: MutableList<QuoteModel>) {
@@ -56,10 +58,9 @@ class LocalQuoteAdapter(
          localtvQuote.text = current.text
 
 
-
          localimgLike.setOnClickListener {
                 GlobalScope.launch {  listener.unlikeListener(quotelist[position],position)
-                 Toast.makeText(context,"Removed",Toast.LENGTH_SHORT).show()
+
              }
 
          }

@@ -9,7 +9,7 @@ import com.kluivert.kwota.data.model.QuoteModel
 @Dao
 interface QuoteDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addQuote(quoteModel: QuoteModel) : Long
 
     @Delete

@@ -199,10 +199,7 @@ class QuoteListFrag : Fragment(),KwotaListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onResume() {
-        super.onResume()
-        quotelistbinding.btnRetry.visibility = View.GONE
-    }
+
 
     @SuppressLint("SetTextI18n")
     private fun displayError(message: String) {
